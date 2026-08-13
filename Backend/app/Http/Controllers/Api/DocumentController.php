@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Models\Document;
+use App\Services\Documents\DocumentProcessingService;
 use Illuminate\Http\JsonResponse;
 
 class DocumentController extends Controller
 {
-    public function store(StoreDocumentRequest $request): JsonResponse
-    {
+    public function store(
+        StoreDocumentRequest $request,
+        DocumentProcessingService $processor
+    ): JsonResponse {
         $file = $request->file('document');
 
         $path = $file->store('documents');
@@ -22,8 +25,10 @@ class DocumentController extends Controller
             'status' => 'pending',
         ]);
 
+        $document = $processor->process($document);
+
         return response()->json([
-            'message' => 'Documento cargado correctamente.',
+            'message' => 'Documento procesado correctamente.',
             'data' => $document,
         ], 201);
     }
