@@ -32,4 +32,41 @@ class DocumentController extends Controller
             'data' => $document,
         ], 201);
     }
+
+    public function index(Request $request): JsonResponse
+    {
+        $query = Document::query();
+    
+        // Filtro por categoría
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+    
+        // Filtro desde una fecha
+        if ($request->filled('date_from')) {
+            $query->whereDate(
+                'document_date',
+                '>=',
+                $request->date_from
+            );
+        }
+    
+        // Filtro hasta una fecha
+        if ($request->filled('date_to')) {
+            $query->whereDate(
+                'document_date',
+                '<=',
+                $request->date_to
+            );
+        }
+    
+        $documents = $query
+            ->latest('document_date')
+            ->get();
+    
+        return response()->json([
+            'data' => $documents,
+        ]);
+    }
+
 }
