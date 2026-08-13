@@ -16,14 +16,41 @@ class UpdateDocumentRequest extends FormRequest
     {
         return [
             'provider' => ['required', 'string', 'max:255'],
-            'document_number' => ['nullable', 'string', 'max:255'],
-            'document_date' => ['nullable', 'date'],
 
-            'subtotal' => ['required', 'numeric', 'min:0'],
-            'tax' => ['required', 'numeric', 'min:0'],
-            'total' => ['required', 'numeric', 'min:0'],
+            'document_number' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
 
-            'currency' => ['required', 'string', 'size:3'],
+            'document_date' => [
+                'nullable',
+                'date',
+            ],
+
+            'subtotal' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'tax' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'total' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'currency' => [
+                'required',
+                'string',
+                'size:3',
+            ],
 
             'category' => [
                 'required',
@@ -36,20 +63,5 @@ class UpdateDocumentRequest extends FormRequest
                 ]),
             ],
         ];
-    }
-
-    public function update(
-        UpdateDocumentRequest $request,
-        Document $document
-    ): JsonResponse {
-        $document->update([
-            ...$request->validated(),
-            'status' => 'confirmed',
-        ]);
-    
-        return response()->json([
-            'message' => 'Documento confirmado correctamente.',
-            'data' => $document->refresh(),
-        ]);
     }
 }
