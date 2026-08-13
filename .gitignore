@@ -1,0 +1,91 @@
+# ==========================================
+# Environment
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Laravel
+# ==========================================
+backend/vendor/
+backend/node_modules/
+
+backend/storage/*.key
+backend/storage/app/*
+!backend/storage/app/.gitignore
+
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/testing/*
+backend/storage/framework/views/*
+backend/storage/logs/*
+
+backend/bootstrap/cache/*
+backend/public/hot
+
+# Laravel SQLite database
+backend/database/*.sqlite
+backend/database/*.sqlite3
+
+# ==========================================
+# React / Vite
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ==========================================
+# Node
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# IDE / Editors
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# OS
+# ==========================================
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Logs
+# ==========================================
+*.log
+
+# ==========================================
+# Temporary files
+# ==========================================
+tmp/
+temp/
+
+# ==========================================
+# Testing / Coverage
+# ==========================================
+coverage/
+.phpunit.result.cache
+
+# ==========================================
+# Uploaded documents / generated files
+# ==========================================
+uploads/
+storage/
+*.jpg
+*.jpeg
+*.png
+*.pdf
+
+# ==========================================
+# Local Docker
+# ==========================================
+docker-data/
